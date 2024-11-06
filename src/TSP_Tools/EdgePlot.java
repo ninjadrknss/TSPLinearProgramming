@@ -1,15 +1,12 @@
 package TSP_Tools;
 
-import TSP_Datasets.Locations;
-import TSP_Datasets.Region;
+import TSP_Datasets.*;
 
 import java.awt.*;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-
 import java.io.IOException;
 import java.io.File;
 
@@ -127,6 +124,12 @@ public class EdgePlot {
 
     public static void main(String[] args) {
         Locations.Regions loc = Locations.Regions.US;
+
+        for (String arg : args) {
+            for (Locations.Regions region : Locations.Regions.values()) {
+                if (arg.equalsIgnoreCase(region.toString())) loc = region;
+            }
+        }
 
         Region[] regions = Locations.values(loc);
         String mapfile = loc.name().replace('_', ' ').toLowerCase() + ".png";
