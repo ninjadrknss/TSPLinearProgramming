@@ -1,20 +1,19 @@
 package TSP_Tools;
 
-import TSP_Datasets.*;
+import TSP_Datasets.Locations;
+import TSP_Datasets.Region;
+
+import java.awt.*;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
+
 import java.io.IOException;
 import java.io.File;
 
 import javax.swing.*;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.BasicStroke;
-import java.awt.Dimension;
 
 public class EdgePlot {
 
@@ -66,8 +65,8 @@ public class EdgePlot {
 
         @Override
         public void paintComponent(Graphics g) {
+            g.setColor(Color.red);
             g.drawImage(map, 0, 0, null);
-            g.setColor(Color.RED);
             if (pointsA.length > 1 && pointsB.length > 1) {
                 drawLines(g, pointsA, pointsB);
             }
@@ -80,16 +79,13 @@ public class EdgePlot {
         int imageHeight = image.getHeight(null);
 
         if (width == 0) {
-            if (height == 0) {
-                height = imageHeight;
-            }
+            if (height == 0) height = imageHeight;
             width = height * imageWidth / imageHeight;
         } else if (height == 0) {
             height = width * imageHeight / imageWidth;
         }
 
-        Image scaled =
-                image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        Image scaled = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
         JFrame frame = new JFrame(title);
         JPanel panel = new MapPanel(width, height, scaled, pointsA, pointsB);
